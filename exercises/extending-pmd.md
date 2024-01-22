@@ -25,7 +25,7 @@ Use your rule with different projects and describe you findings below. See the [
 
 Voici notre rule XML :
 
-<rule name="AvoidNestedIf"
+    <rule name="AvoidNestedIf"
           language="java"
           maximumLanguageVersion="17"
           message="There are three or more nested ifs in your method"
@@ -39,13 +39,13 @@ Voici notre rule XML :
             <property name="xpath">
                 <value>
                     <![CDATA[
-               //IfStatement[count(.//IfStatement) >= 3]                ]]>
+               //IfStatement[count(.//IfStatement) >= 2]                ]]>
                 </value>
             </property>
         </properties>
     </rule>
 
-Le soucis, c'est que ici les ifs qui se suivent sans être imbriqués sont remontés.
+Le soucis, c'est que ici les ifs qui sont suivis par des else ifs sont remontés car ils appartiennent au même if statement.
 
 Exemple : 
 
@@ -58,6 +58,6 @@ if (radius > 0.019 && radius <= 0.076) {
         }
 est détecté par PMD.
 
-Nous n'avons pas trouvé la rule exact :(
+Nous n'avons pas trouvé la rule exact permettant d'empecher cela :(
 
 
